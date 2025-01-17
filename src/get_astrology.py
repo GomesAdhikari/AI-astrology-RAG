@@ -5,7 +5,7 @@ import google.generativeai as genai
 import os
 
 # Configure the Gemini API
-genai.configure(api_key="AIzaSyBzWZlpLRF83w969LXpLsPofILiQg_Sen8")
+genai.configure(api_key="AIzLXpLsPofILiQg_Sen8")
 
 class GetAstrology:
     def __init__(self):
