@@ -1,0 +1,249 @@
+/* Custom Properties */
+:root {
+    --color-primary: #2a1b3d;
+    --color-secondary: #e4d9ff;
+    --color-accent: #7d12ff;
+    --color-text: #ffffff;
+    --overlay-opacity: 0.5;
+    --header-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --nav-transition: all 0.3s ease;
+    --card-bg: rgba(42, 27, 61, 0.8);
+}
+
+/* Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    background-color: #000;
+}
+
+/* Background and Overlay */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+body::before {
+    background-image: url('../images/astro2.jpg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+body::after {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(42, 27, 61, 0.7) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+}
+
+/* Stars Animation Container */
+.stars-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+
+
+/* Twinkling Stars */
+.twinkle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle 1.5s ease-in-out infinite;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--header-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-shadow: 0 0 10px rgba(125, 18, 255, 0.3);
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--color-secondary);
+    font-weight: 500;
+    padding: 0.8rem 1.2rem;
+    border-radius: 2rem;
+    position: relative;
+    transition: var(--nav-transition);
+    border: 1px solid transparent;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Card Styles */
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Animations */
+@keyframes shooting-star-animation {
+    0% {
+        transform: translateX(0) rotate(35deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(1000px) rotate(35deg);
+        opacity: 0;
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    border: none;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: var(--color-text);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(125, 18, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        padding: 0.6rem 1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }

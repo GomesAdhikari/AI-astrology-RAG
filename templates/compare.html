@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Birth Charts{% endblock %}
+
+{% block content %}
+<div class="compare-container">
+    <h2 class="compare-title">Compare Birth Charts</h2>
+    <div class="compare-intro">
+        <p>Discover the cosmic compatibility between two souls. Enter birth details below to analyze your astrological connection.</p>
+    </div>
+
+    <div class="comparison-form-container">
+        <div class="chart-forms">
+            <!-- First Person's Chart -->
+            <form class="birth-chart-form person-one">
+                <h3>First Person's Details</h3>
+                <div class="form-group">
+                    <label for="person1-name">Name</label>
+                    <input type="text" id="person1-name" name="person1-name" placeholder="Enter name" required>
+                </div>
+                <div class="form-group">
+                    <label for="person1-date">Date of Birth</label>
+                    <input type="date" id="person1-date" name="person1-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="person1-time">Time of Birth</label>
+                    <input type="time" id="person1-time" name="person1-time" required>
+                </div>
+                <div class="form-group">
+                    <label for="person1-location">Place of Birth</label>
+                    <input type="text" id="person1-location" name="person1-location" placeholder="City, Country" required>
+                </div>
+            </form>
+
+            <!-- Second Person's Chart -->
+            <form class="birth-chart-form person-two">
+                <h3>Second Person's Details</h3>
+                <div class="form-group">
+                    <label for="person2-name">Name</label>
+                    <input type="text" id="person2-name" name="person2-name" placeholder="Enter name" required>
+                </div>
+                <div class="form-group">
+                    <label for="person2-date">Date of Birth</label>
+                    <input type="date" id="person2-date" name="person2-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="person2-time">Time of Birth</label>
+                    <input type="time" id="person2-time" name="person2-time" required>
+                </div>
+                <div class="form-group">
+                    <label for="person2-location">Place of Birth</label>
+                    <input type="text" id="person2-location" name="person2-location" placeholder="City, Country" required>
+                </div>
+            </form>
+        </div>
+
+        <button type="submit" class="compare-btn" onclick="compareCharts()">Compare Charts</button>
+    </div>
+
+    <div class="comparison-results" id="comparison-results" style="display: none;">
+        <div class="charts-display">
+            <div class="chart person1-chart">
+                <div class="chart-wheel"></div>
+            </div>
+            <div class="compatibility-score">
+                <div class="score-circle">
+                    <span class="score-number">0%</span>
+                </div>
+            </div>
+            <div class="chart person2-chart">
+                <div class="chart-wheel"></div>
+            </div>
+        </div>
+        <div class="analysis-section">
+            <h3>Compatibility Analysis</h3>
+            <div class="analysis-content">
+                <!-- Analysis content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.compare-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.compare-title {
+    color: var(--text-color);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #8e44ad, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.compare-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #ecf0f1;
+    line-height: 1.6;
+}
+
+.comparison-form-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.chart-forms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.birth-chart-form {
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.birth-chart-form h3 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(142, 68, 173, 0.3);
+}
+
+.compare-btn {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #8e44ad, #3498db);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.compare-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+}
+
+.comparison-results {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+.charts-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.chart {
+    width: 250px;
+    height: 250px;
+    position: relative;
+}
+
+.chart-wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(142, 68, 173, 0.3);
+    position: relative;
+    animation: rotate 60s linear infinite;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.compatibility-score {
+    text-align: center;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #8e44ad, #3498db);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.score-number {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.analysis-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analysis-section h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .compare-container {
+        padding: 1rem;
+    }
+
+    .chart-forms {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .charts-display {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .chart {
+        width: 200px;
+        height: 200px;
+    }
+}
+</style>
+
+<script>
+function compareCharts() {
+    // Show results section
+    document.getElementById('comparison-results').style.display = 'block';
+    
+    // Scroll to results
+    document.getElementById('comparison-results').scrollIntoView({
+        behavior: 'smooth'
+    });
+    
+    // You would typically make an API call here to get the actual comparison results
+    // This is just a placeholder animation for the compatibility score
+    let score = 0;
+    const scoreElement = document.querySelector('.score-number');
+    const targetScore = Math.floor(Math.random() * 40) + 60; // Random score between 60-99
+    
+    const interval = setInterval(() => {
+        if (score >= targetScore) {
+            clearInterval(interval);
+            return;
+        }
+        score++;
+        scoreElement.textContent = score + '%';
+    }, 30);
+}
+</script>
+{% endblock %}

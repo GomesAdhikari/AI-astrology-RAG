@@ -1,0 +1,14 @@
+geopy
+timezonefinder
+pytz
+flask
+pyswisseph
+google-generativeai
+python-dotenv
+langchain
+faiss-cpu
+PyPDF2
+langchain_google_genai
+streamlit
+langchain-community
+#-e .

@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+
+{% block title %}Horoscope{% endblock %}
+
+{% block content %}
+<div class="horoscope-container">
+    <h2 class="horoscope-title">Daily & Weekly Horoscope</h2>
+    <div class="horoscope-intro">
+        <p>Discover what the stars have aligned for you. Select your zodiac sign to reveal your cosmic forecast.</p>
+    </div>
+
+    <div class="zodiac-selector">
+        <div class="zodiac-grid">
+            <div class="zodiac-sign" data-sign="aries">
+                <div class="sign-icon">♈</div>
+                <span>Aries</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="taurus">
+                <div class="sign-icon">♉</div>
+                <span>Taurus</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="gemini">
+                <div class="sign-icon">♊</div>
+                <span>Gemini</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="cancer">
+                <div class="sign-icon">♋</div>
+                <span>Cancer</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="leo">
+                <div class="sign-icon">♌</div>
+                <span>Leo</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="virgo">
+                <div class="sign-icon">♍</div>
+                <span>Virgo</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="libra">
+                <div class="sign-icon">♎</div>
+                <span>Libra</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="scorpio">
+                <div class="sign-icon">♏</div>
+                <span>Scorpio</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="sagittarius">
+                <div class="sign-icon">♐</div>
+                <span>Sagittarius</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="capricorn">
+                <div class="sign-icon">♑</div>
+                <span>Capricorn</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="aquarius">
+                <div class="sign-icon">♒</div>
+                <span>Aquarius</span>
+            
+            </div>
+            <div class="zodiac-sign" data-sign="pisces">
+                <div class="sign-icon">♓</div>
+                <span>Pisces</span>
+            
+            </div>
+        </div>
+    </div>
+
+    <div class="horoscope-display" id="horoscope-content" style="display: none;">
+        <div class="time-selector">
+            <button class="time-btn active" data-time="daily">Daily</button>
+            <button class="time-btn" data-time="weekly">Weekly</button>
+        </div>
+
+        <div class="forecast-container">
+            <div class="selected-sign">
+                <div class="sign-large-icon"></div>
+                <h3 class="sign-name"></h3>
+            </div>
+            
+            <div class="forecast-content">
+                <div class="daily-forecast">
+                    <h4>Your Daily Horoscope</h4>
+                    <p class="forecast-text"></p>
+                </div>
+                
+                <div class="cosmic-aspects">
+                    <div class="aspect">
+                        <h5>Lucky Number</h5>
+                        <span class="lucky-number"></span>
+                    </div>
+                    <div class="aspect">
+                        <h5>Lucky Color</h5>
+                        <span class="lucky-color"></span>
+                    </div>
+                    <div class="aspect">
+                        <h5>Mood</h5>
+                        <span class="mood"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.horoscope-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.horoscope-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, #8e44ad, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.horoscope-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.zodiac-selector {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.zodiac-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.zodiac-sign {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.zodiac-sign:hover {
+    background: rgba(142, 68, 173, 0.2);
+    transform: translateY(-5px);
+}
+
+.sign-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.zodiac-sign span {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+    color: var(--text-color);
+}
+
+.zodiac-sign small {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    color: var(--text-color);
+}
+
+.horoscope-display {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+.time-selector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.time-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-btn.active {
+    background: linear-gradient(45deg, #8e44ad, #3498db);
+    box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+}
+
+.selected-sign {
+    text-align: center;
+}
+
+.sign-large-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.sign-name {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.forecast-content {
+    padding: 1rem;
+}
+
+.daily-forecast h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.forecast-text {
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+.cosmic-aspects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.aspect {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.aspect h5 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.aspect span {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .zodiac-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-container {
+        grid-template-columns: 1fr;
+    }
+
+    .cosmic-aspects {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const zodiacSigns = document.querySelectorAll('.zodiac-sign');
+    const horoscopeContent = document.getElementById('horoscope-content');
+    const timeBtns = document.querySelectorAll('.time-btn');
+
+    zodiacSigns.forEach(sign => {
+        sign.addEventListener('click', function() {
+            const signName = this.getAttribute('data-sign');
+            showHoroscope(signName);
+            horoscopeContent.style.display = 'block';
+            horoscopeContent.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    timeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            timeBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            // Here you would typically fetch and update the horoscope based on the selected time period
+        });
+    });
+
+    function showHoroscope(sign) {
+        const signIcon = document.querySelector('.sign-large-icon');
+        const signName = document.querySelector('.sign-name');
+        const forecastText = document.querySelector('.forecast-text');
+        const luckyNumber = document.querySelector('.lucky-number');
+        const luckyColor = document.querySelector('.lucky-color');
+        const mood = document.querySelector('.mood');
+
+        // Update sign information
+        signIcon.textContent = getZodiacSymbol(sign);
+        signName.textContent = capitalizeFirstLetter(sign);
+
+        // Placeholder horoscope data - replace with actual API data
+        forecastText.textContent = `The stars are aligned in your favor today. Your natural ${sign} traits will help you overcome any challenges that come your way. Focus on your goals and trust your instincts.`;
+        luckyNumber.textContent = Math.floor(Math.random() * 99) + 1;
+        luckyColor.textContent = ['Blue', 'Red', 'Green', 'Purple', 'Gold'][Math.floor(Math.random() * 5)];
+        mood.textContent = ['Energetic', 'Peaceful', 'Creative', 'Inspired', 'Focused'][Math.floor(Math.random() * 5)];
+    }
+
+    function getZodiacSymbol(sign) {
+        const symbols = {
+            aries: '♈', taurus: '♉', gemini: '♊', cancer: '♋',
+            leo: '♌', virgo: '♍', libra: '♎', scorpio: '♏',
+            sagittarius: '♐', capricorn: '♑', aquarius: '♒', pisces: '♓'
+        };
+        return symbols[sign];
+    }
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+});
+</script>
+{% endblock %}

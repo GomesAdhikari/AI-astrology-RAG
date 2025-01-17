@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="stars-container">
+    <!-- Shooting stars -->
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    
+    <!-- Generate twinkling stars -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const starsContainer = document.querySelector('.stars-container');
+            // Create 50 twinkling stars
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'twinkle';
+                // Random position
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                // Random animation delay
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                starsContainer.appendChild(star);
+            }
+        });
+    </script>
+</div>
+<div class="dashboard-container">
+    <div class="welcome-section">
+        <h2 class="welcome-title">Welcome, {{ session['user'] }}!</h2>
+        <p class="welcome-message">Explore your cosmic journey with our astrological tools and insights.</p>
+    </div>
+
+    <div class="features-grid">
+        <!-- Horoscope Card -->
+        <a href="{{ url_for('horoscope') }}" class="feature-card">
+            <div class="card-content horoscope">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" class="feature-icon">
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 2 L12 22 M2 12 L22 12" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Daily & Weekly Horoscope</h3>
+                <p>Get personalized predictions and cosmic insights for your zodiac sign.</p>
+            </div>
+        </a>
+
+        <!-- Birth Chart Card -->
+        <a href="{{ url_for('birth_chart') }}" class="feature-card">
+            <div class="card-content birth-chart">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" class="feature-icon">
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 6 L12 18 M6 12 L18 12" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Birth Chart Analysis</h3>
+                <p>Discover your unique astrological blueprint and planetary positions.</p>
+            </div>
+        </a>
+
+        <!-- Chat Card -->
+        <a href="{{ url_for('chat') }}" class="feature-card">
+            <div class="card-content chat">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" class="feature-icon">
+                        <path d="M4 4h16v12H6l-4 4V4z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Astrological Chat Queries</h3>
+                <p>Get instant answers to your celestial questions from our AI astrologer.</p>
+            </div>
+        </a>
+
+        <!-- Compare Charts Card -->
+        <a href="{{ url_for('compare') }}" class="feature-card">
+            <div class="card-content compare">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" class="feature-icon">
+                        <circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="16" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Compare Birth Charts</h3>
+                <p>Analyze compatibility and relationships through astrological synastry.</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Gomes Singh Adhikari | <a href="gomesadhikari@gmail.com">gomesadhikari@gmail.com</a></p>
+        <p>Astrology is the study of celestial bodies' movements and positions, believed to influence human affairs and natural events. It is a practice dating back thousands of years, blending observation, symbolism, and mythology.</p>
+    </div>
+</div>
+
+<style>
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #ffffff, #a2d7fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.welcome-message {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-content {
+    background: rgba(84, 99, 235, 0.1);
+    backdrop-filter: blur(10%);
+    border-radius: 15px;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-content:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background: rgba(142, 68, 173, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon {
+    width: 100%;
+    height: 100%;
+    color: var(--text-color);
+}
+
+.card-content h3 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-content p {
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* Unique gradients for each card on hover */
+.horoscope:hover {
+    background: linear-gradient(135deg, rgba(142, 68, 173, 0.1), rgba(52, 152, 219, 0.1));
+}
+
+.birth-chart:hover {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+}
+
+.chat:hover {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(241, 196, 15, 0.1));
+}
+
+.compare:hover {
+    background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(142, 68, 173, 0.1));
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+
+    .welcome-title {
+        font-size: 2rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Footer styles */
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    overflow-y: auto;
+    height: 10rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin-top: 3rem;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.footer p {
+    margin: 0.5rem 0;
+}
+
+.footer a {
+    color: #a2d7fb;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+</style>
+{% endblock %}

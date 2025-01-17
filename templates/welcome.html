@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to AI Astrologer{% endblock %}
+
+{% block content %}
+<div class="welcome-container">
+    <div class="welcome-content">
+        <h2 class="welcome-title">Welcome to AI Astrologer!</h2>
+        <p class="welcome-text">Your personalized astrology insights await. Discover what the stars have in store for you.</p>
+        <div class="welcome-cta">
+            <a href="{{ url_for('dashboard') }}" class="dashboard-button">Go to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.welcome-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-content {
+    padding: 2rem;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    color: #e4d9ff;
+}
+
+.welcome-cta {
+    margin-top: 2rem;
+}
+
+.dashboard-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dashboard-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .welcome-container {
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+
+    .welcome-title {
+        font-size: 2rem;
+    }
+
+    .welcome-text {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-title {
+        font-size: 1.8rem;
+    }
+
+    .welcome-text {
+        font-size: 1rem;
+    }
+
+    .dashboard-button {
+        padding: 0.8rem 1.6rem;
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}

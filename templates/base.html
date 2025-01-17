@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Astrologer{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Background Orbs -->
+    <div class="orb"></div>
+    <div class="orb"></div>
+
+    <!-- Sparkle Container -->
+    <div class="sparkle-container">
+        {% for i in range(20) %}
+        <div class="sparkle" style="top: {{ range(0, 100)|random }}%; left: {{ range(0, 100)|random }}%;"></div>
+        {% endfor %}
+    </div>
+
+    <header>
+        <h1 style="
+        color: rgb(255, 255, 255); 
+        font-family: 'Arial', sans-serif; 
+        font-size: 48px; 
+        text-shadow: 0 0 10px rgba(0, 85, 255, 0.5), 
+                     0 0 20px rgba(0, 145, 255, 0.5), 
+                     0 0 30px rgba(40, 221, 253, 0.4), 
+                     0 0 40px rgba(0, 225, 255, 0.2);
+    ">
+        ASTRO AI
+    </h1>
+    
+        <nav>
+            <a href="{{ url_for('welcome') }}" class="nav-link">
+                <span class="nav-icon">🏠</span>
+                Home
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="nav-link">
+                <span class="nav-icon">📊</span>
+                Dashboard
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Additional Decorative Elements -->
+    <div class="constellation-grid"></div>
+</body>
+</html>
